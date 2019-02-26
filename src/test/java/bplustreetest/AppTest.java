@@ -107,13 +107,17 @@ public class AppTest {
         }
     }
 
+    public AppTest() {
+        super();
+    }
+
     @Test
     public void testInsertRoot() {
         AtomicInteger atomicInteger = new AtomicInteger();
 
         NodeBuilder<String> nodeBuilder = new NodeBuilder<>(5);
         nodeBuilder.insert("TEST", atomicInteger.incrementAndGet());
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<String> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new String[] {"TEST", null, null, null, null}, rootNode.getKeys());
         assertArrayEquals(new Integer[] {1, null, null, null, null, null}, rootNode.getPointers());
@@ -127,7 +131,7 @@ public class AppTest {
         nodeBuilder.insert("A", atomicInteger.incrementAndGet());
         nodeBuilder.insert("B", atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<String> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new String[] {"A", "B", null, null, null}, rootNode.getKeys());
         assertArrayEquals(new Integer[] {1, 2, null, null, null, null}, rootNode.getPointers());
@@ -143,7 +147,7 @@ public class AppTest {
             .insert("B", atomicInteger.incrementAndGet())
             .insert("C", atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<String> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new String[] {"A", "B", "C", null}, rootNode.getKeys());
         assertArrayEquals(new Integer[] {1, 2, 3, null, null}, rootNode.getPointers());
@@ -160,7 +164,7 @@ public class AppTest {
             .insert("C", atomicInteger.incrementAndGet())
             .insert("D", atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<String> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new String[] {"A", "B", "C", "D", null}, rootNode.getKeys());
         assertArrayEquals(new Integer[] {1, 2, 3, 4, null, null}, rootNode.getPointers());
@@ -178,15 +182,15 @@ public class AppTest {
                 .insert("D", atomicInteger.incrementAndGet())
                 .insert("E", atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<String> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new String[] {"C", null, null, null, null}, rootNode.getKeys());
 
-        Node child1 = (Node)rootNode.getPointers()[0];
+        Node<String> child1 = (Node<String>)rootNode.getPointers()[0];
         assertArrayEquals(new String[] {"A", "B", null, null, null}, child1.getKeys());
         assertArrayEquals(new Integer[] {1, 2, null, null, null, null}, child1.getPointers());
 
-        Node child2 = (Node)rootNode.getPointers()[1];
+        Node<String> child2 = (Node<String>)rootNode.getPointers()[1];
         assertArrayEquals(new String[] {"C", "D", "E", null, null}, child2.getKeys());
         assertArrayEquals(new Integer[] {3, 4, 5, null, null, null}, child2.getPointers());
     }
@@ -201,15 +205,15 @@ public class AppTest {
                 .insert(2, atomicInteger.incrementAndGet())
                 .insert(3, atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<Integer> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new Integer[] {2, null, null}, rootNode.getKeys());
 
-        Node child1 = (Node)rootNode.getPointers()[0];
+        Node<Integer> child1 = (Node<Integer>)rootNode.getPointers()[0];
         assertArrayEquals(new Integer[] {1, null, null}, child1.getKeys());
         assertArrayEquals(new Integer[] {1, null, null, null}, child1.getPointers());
 
-        Node child2 = (Node)rootNode.getPointers()[1];
+        Node<Integer> child2 = (Node<Integer>)rootNode.getPointers()[1];
         assertArrayEquals(new Integer[] {2, 3, null}, child2.getKeys());
         assertArrayEquals(new Integer[] {2, 3, null, null}, child2.getPointers());
     }
@@ -229,15 +233,15 @@ public class AppTest {
 
         assertArrayEquals(new Integer[] {2, 3, null}, rootNode.getKeys());
 
-        Node child1 = (Node)rootNode.getPointers()[0];
+        Node<Integer> child1 = (Node<Integer>)rootNode.getPointers()[0];
         assertArrayEquals(new Integer[] {1, null, null}, child1.getKeys());
         assertArrayEquals(new Integer[] {1, null, null, null}, child1.getPointers());
 
-        Node child2 = (Node)rootNode.getPointers()[1];
+        Node<Integer> child2 = (Node<Integer>)rootNode.getPointers()[1];
         assertArrayEquals(new Integer[] {2, null, null}, child2.getKeys());
         assertArrayEquals(new Integer[] {2, null, null, null}, child2.getPointers());
 
-        Node child3 = (Node)rootNode.getPointers()[2];
+        Node<Integer> child3 = (Node<Integer>)rootNode.getPointers()[2];
         assertArrayEquals(new Integer[] {3, 4, null}, child3.getKeys());
         assertArrayEquals(new Integer[] {3, 4, null, null}, child3.getPointers());
     }
@@ -254,28 +258,30 @@ public class AppTest {
                 .insert(4, atomicInteger.incrementAndGet())
                 .insert(5, atomicInteger.incrementAndGet());
 
-        Node rootNode = nodeBuilder.getRootNode();
+        Node<Integer> rootNode = nodeBuilder.getRootNode();
 
         assertArrayEquals(new Integer[] {3, null, null}, rootNode.getKeys());
 
-        Node child1 = (Node)rootNode.getPointers()[0];
+        Node<Integer> child1 = (Node<Integer>)rootNode.getPointers()[0];
         assertArrayEquals(new Integer[] {2, null, null}, child1.getKeys());
         {
-            Node[] childChild1 = (Node[]) child1.getPointers();
+            Node<Integer>[] childChild1 = child1.getPointers();
             assertArrayEquals(new Integer[] {1, null, null}, childChild1[0].getKeys());
             assertArrayEquals(new Integer[] {1, null, null, null}, childChild1[0].getPointers());
             assertArrayEquals(new Integer[] {2, null, null}, childChild1[1].getKeys());
             assertArrayEquals(new Integer[] {2, null, null, null}, childChild1[1].getPointers());
         }
 
-        Node child2 = (Node)rootNode.getPointers()[1];
+        Node<Integer> child2 = (Node<Integer>)rootNode.getPointers()[1];
         assertArrayEquals(new Integer[] {4, null, null}, child2.getKeys());
         {
-            Node[] childChild1 = (Node[]) child2.getPointers();
-            assertArrayEquals(new Integer[] {3, null, null}, childChild1[0].getKeys());
-            assertArrayEquals(new Integer[] {3, null, null, null}, childChild1[0].getPointers());
-            assertArrayEquals(new Integer[] {4, 5, null}, childChild1[1].getKeys());
-            assertArrayEquals(new Integer[] {4, 5, null, null}, childChild1[1].getPointers());
+            Object[] childChild1 = child2.getPointers();
+            Node childchildchild1 = (Node) childChild1[0];
+            assertArrayEquals(new Integer[] {3, null, null}, childchildchild1.getKeys());
+            assertArrayEquals(new Integer[] {3, null, null, null}, childchildchild1.getPointers());
+            childchildchild1 = (Node) childChild1[1];
+            assertArrayEquals(new Integer[] {4, 5, null}, childchildchild1.getKeys());
+            assertArrayEquals(new Integer[] {4, 5, null, null}, childchildchild1.getPointers());
         }
     }
 }

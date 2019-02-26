@@ -2,7 +2,7 @@ package bplustreetest;
 
 public class NodeFinder {
 
-    public <T> NodeResult find(Comparable<T> key, Node root) {
+    public <T> NodeResult find(Comparable<T> key, Node<T> root) {
         if (key == null) {
             return null;
         }
@@ -10,11 +10,11 @@ public class NodeFinder {
             return null;
         }
 
-        Node currentNode = root;
+        Node<T> currentNode = root;
         while (!currentNode.isLeaf()) {
             final int i = currentNode.findSmallestNumberLargerThanKey(key);
             if (i < 0) {
-                Node nonNullPointer = currentNode.getLastNonNullPointer();
+                Node<T> nonNullPointer = currentNode.getLastNonNullPointer();
                 currentNode = nonNullPointer;
             } else if(currentNode.getKeys()[i] != null && key.compareTo((T) currentNode.getKeys()[i]) == 0) {
                 currentNode = (Node) currentNode.getPointers()[i + 1];
@@ -31,7 +31,7 @@ public class NodeFinder {
         return null;
     }
 
-    public <T> Node findInsertTarget(Comparable<T> key, Node root) {
+    public <T> Node<T> findInsertTarget(Comparable<T> key, Node root) {
         if (key == null) {
             return null;
         }
@@ -39,11 +39,11 @@ public class NodeFinder {
             return null;
         }
 
-        Node currentNode = root;
+        Node<T> currentNode = root;
         while (!currentNode.isLeaf()) {
             final int i = currentNode.findSmallestNumberLargerThanKey(key);
             if (i < 0) {
-                Node nonNullPointer = currentNode.getLastNonNullPointer();
+                Node<T> nonNullPointer = currentNode.getLastNonNullPointer();
                 currentNode = nonNullPointer;
             } else if(currentNode.getKeys()[i] != null && key.compareTo((T) currentNode.getKeys()[i]) == 0) {
                 currentNode = (Node) currentNode.getPointers()[i + 1];
