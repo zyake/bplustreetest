@@ -34,7 +34,7 @@ public class NodeBuilder<T> {
             Node parent = insertionNode.getParent();
             insertionNode.reset();
 
-            copyRangeToEnd(copiedNode, size/2, insertionNode);
+            copyRange(copiedNode,0, size/2, insertionNode);
             insertionNode.setParent(parent);
 
             Comparable newValue = copiedNode.getKeys()[size/2];
@@ -67,9 +67,41 @@ public class NodeBuilder<T> {
             parent.reset();
             Node newParentNode = new Node(size);
 
-            copyRangeToEnd(copiedParent,  size/2, parent);
+//            copyRange(copiedParent,  0,size/2 + 1, parent);
+            {
+                Node sourceNode = copiedParent;
+                Node destNode = parent;
+                Object[] sourcePointers = sourceNode.getPointers();
+                Comparable[] sourceKeys = sourceNode.getKeys();
+                Object[] destPointers = destNode.getPointers();
+                Comparable[] destKeys = destNode.getKeys();
+
+                // end must consider the actual size of the node.
+                for (int i = 0 ; i < (size + 1)/2 ; i ++) {
+                    destPointers[i] = sourcePointers[i];
+                }
+                for (int i = 0 ; i < size/2 ; i ++) {
+                    destKeys[i] = sourceKeys[i];
+                }
+            }
             Comparable newKey = copiedParent.getKeys()[size/2];
-            copyRangeFrom(copiedParent,size/2 + 1, newParentNode);
+//            copyRangeFrom(copiedParent,size/2 + 1, newParentNode);
+            {
+                Node sourceNode = copiedParent;
+                Node destNode = newParentNode;
+                Object[] sourcePointers = sourceNode.getPointers();
+                Comparable[] sourceKeys = sourceNode.getKeys();
+                Object[] destPointers = destNode.getPointers();
+                Comparable[] destKeys = destNode.getKeys();
+
+                // end must consider the actual size of the node.
+                for (int i = (size + 1)/2 ; i < size + 1 ; i ++) {
+                    destPointers[i - (size + 1)/2] = sourcePointers[i];
+                }
+                for (int i = size/2 + 1 ; i < size ; i ++) {
+                    destKeys[i - (size/2 + 1)] = sourceKeys[i];
+                }
+            }
             insertInParent(parent, newKey, newParentNode);
         }
     }
@@ -121,17 +153,17 @@ public class NodeBuilder<T> {
         }
     }
 
-    private void copyRangeToEnd(Node sourceNode, int end, Node destNode) {
+    private void copyRange(Node sourceNode, int from, int end, Node destNode) {
         Object[] sourcePointers = sourceNode.getPointers();
         Comparable[] sourceKeys = sourceNode.getKeys();
         Object[] destPointers = destNode.getPointers();
         Comparable[] destKeys = destNode.getKeys();
 
         // end must consider the actual size of the node.
-        for (int i = 0 ; i < end ; i ++) {
+        for (int i = from ; i < end ; i ++) {
             destPointers[i] = sourcePointers[i];
         }
-        for (int i = 0 ; i < end ; i ++) {
+        for (int i = from ; i < end ; i ++) {
             destKeys[i] = sourceKeys[i];
         }
     }
