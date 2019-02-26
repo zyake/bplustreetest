@@ -15,29 +15,34 @@ public class NodeBuilder<T> {
     }
 
     public NodeBuilder<T> insert(Comparable<T> value, Object pointer) {
-        Node node;
+        Node insertionNode;
         if (rootNode == null) {
             rootNode = new Node(size, Arrays.asList(value), Arrays.asList(pointer));
             return this;
         } else {
-            node = nodeFinder.findInsertTarget(value, rootNode);
+            insertionNode = nodeFinder.findInsertTarget(value, rootNode);
         }
 
-        int lastKeyIndex = node.getLastKeyIndex();
+        int lastKeyIndex = insertionNode.getLastKeyIndex();
         if (lastKeyIndex < size - 1) {
-            insertInLeaf(node, value, pointer, lastKeyIndex);
+            insertInLeaf(insertionNode, value, pointer, lastKeyIndex);
         } else {
             Node newNode = new Node(size);
-            Node copiedNode = cloneNode(node);
+            Node copiedNode = cloneNode(insertionNode);
             insertInLeaf(copiedNode, value, pointer, lastKeyIndex);
-            Node parent = node.getParent();
-            node.reset();
-            copyRangeToEnd(copiedNode, size/2, node);
-            node.setParent(parent);
+
+            Node parent = insertionNode.getParent();
+            insertionNode.reset();
+
+            copyRangeToEnd(copiedNode, size/2, insertionNode);
+            insertionNode.setParent(parent);
+
             Comparable newValue = copiedNode.getKeys()[size/2];
+
             copyRangeFrom(copiedNode, size/2, newNode);
             newNode.setParent(parent);
-            insertInParent(node, newValue, newNode);
+
+            insertInParent(insertionNode, newValue, newNode);
         }
         return this;
     }
@@ -107,6 +112,7 @@ public class NodeBuilder<T> {
         Object[] destPointers = destNode.getPointers();
         Comparable[] destKeys = destNode.getKeys();
 
+        // end must consider the actual size of the node.
         for (int i = from ; i < size ; i ++) {
             destPointers[i - from] = sourcePointers[i];
         }
@@ -121,6 +127,7 @@ public class NodeBuilder<T> {
         Object[] destPointers = destNode.getPointers();
         Comparable[] destKeys = destNode.getKeys();
 
+        // end must consider the actual size of the node.
         for (int i = 0 ; i < end ; i ++) {
             destPointers[i] = sourcePointers[i];
         }

@@ -179,4 +179,9 @@ public class Node<T> implements Cloneable {
         }
         return -1;
     }
+
+    @Override
+    public String toString() {
+        return String.format("id=%d, keys=%s", id, Arrays.asList(keys));
+    }
 }
