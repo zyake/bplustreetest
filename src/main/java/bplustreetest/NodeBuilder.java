@@ -67,7 +67,6 @@ public class NodeBuilder<T> {
             parent.reset();
             Node newParentNode = new Node(size);
 
-//            copyRange(copiedParent,  0,size/2 + 1, parent);
             {
                 Node sourceNode = copiedParent;
                 Node destNode = parent;
@@ -85,7 +84,6 @@ public class NodeBuilder<T> {
                 }
             }
             Comparable newKey = copiedParent.getKeys()[size/2];
-//            copyRangeFrom(copiedParent,size/2 + 1, newParentNode);
             {
                 Node sourceNode = copiedParent;
                 Node destNode = newParentNode;

@@ -268,7 +268,6 @@ public class AppTest {
             assertArrayEquals(new Integer[] {2, null, null, null}, childChild1[1].getPointers());
         }
 
-
         Node child2 = (Node)rootNode.getPointers()[1];
         assertArrayEquals(new Integer[] {4, null, null}, child2.getKeys());
         {

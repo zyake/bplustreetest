@@ -65,11 +65,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AppTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="279" column="9" selection-start-line="279" selection-start-column="9" selection-end-line="279" selection-end-column="9" />
+            <state relative-caret-position="174">
+              <caret line="268" column="9" selection-start-line="268" selection-start-column="9" selection-end-line="268" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -77,11 +77,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NodeBuilder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="NodeBuilder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/bplustreetest/NodeBuilder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="408">
+              <caret line="86" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#232#233#0" expanded="true" />
                 <element signature="e#264#265#0" expanded="true" />
@@ -136,8 +136,8 @@
         <option value="$PROJECT_DIR$/src/main/java/bplustreetest/NodeResult.java" />
         <option value="$PROJECT_DIR$/src/main/java/bplustreetest/NodeFinder.java" />
         <option value="$PROJECT_DIR$/src/main/java/bplustreetest/Node.java" />
-        <option value="$PROJECT_DIR$/src/main/java/bplustreetest/NodeBuilder.java" />
         <option value="$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/bplustreetest/NodeBuilder.java" />
       </list>
     </option>
   </component>
@@ -147,7 +147,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1134" />
     <option name="width" value="1131" />
     <option name="height" value="1454" />
@@ -466,7 +466,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="756" y="0" width="754" height="969" extended-state="0" />
+    <frame x="-7" y="-7" width="1519" height="977" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -481,7 +481,7 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39252338" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3888889" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info id="DB Browser" order="2" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.3317757" />
@@ -546,18 +546,6 @@
           <line>225</line>
           <properties />
           <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java</url>
-          <line>256</line>
-          <properties />
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java</url>
-          <line>254</line>
-          <properties />
-          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="45" />
@@ -743,23 +731,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/bplustreetest/NodeBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="174">
+          <caret line="268" column="9" selection-start-line="268" selection-start-column="9" selection-end-line="268" selection-end-column="9" />
           <folding>
-            <element signature="e#232#233#0" expanded="true" />
-            <element signature="e#264#265#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/bplustreetest/AppTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/bplustreetest/NodeBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="279" column="9" selection-start-line="279" selection-start-column="9" selection-end-line="279" selection-end-column="9" />
+        <state relative-caret-position="408">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#232#233#0" expanded="true" />
+            <element signature="e#264#265#0" expanded="true" />
           </folding>
         </state>
       </provider>
