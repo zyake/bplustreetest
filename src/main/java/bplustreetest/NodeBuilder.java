@@ -47,7 +47,7 @@ public class NodeBuilder<T> {
         return this;
     }
 
-    public Node getRootNode() {
+    public Node<T> getRootNode() {
         return rootNode;
     }
 

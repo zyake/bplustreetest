@@ -284,4 +284,21 @@ public class AppTest {
             assertArrayEquals(new Integer[] {4, 5, null, null}, childchildchild1.getPointers());
         }
     }
+    @Test
+    public void testInsert19Nodes() {
+        AtomicInteger atomicInteger = new AtomicInteger();
+
+        NodeBuilder<Integer> nodeBuilder = new NodeBuilder<>(3);
+        nodeBuilder
+                .insert(1, atomicInteger.incrementAndGet())
+                .insert(2, atomicInteger.incrementAndGet())
+                .insert(3, atomicInteger.incrementAndGet())
+                .insert(4, atomicInteger.incrementAndGet())
+                .insert(5, atomicInteger.incrementAndGet())
+                .insert(6, atomicInteger.incrementAndGet());
+
+        Node<Integer> rootNode = nodeBuilder.getRootNode();
+
+
+    }
 }

@@ -168,7 +168,7 @@ public class Node<T> implements Cloneable {
         int i;
         for ( i = 0 ; i < keys.length && keys[i] != null ; i ++) {
         }
-        return i + 1 != keys.length;
+        return i < keys.length - 1;
     }
 
     public int findInsertionTargetPointer(Node targetNode) {
