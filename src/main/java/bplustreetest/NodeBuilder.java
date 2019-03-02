@@ -34,12 +34,41 @@ public class NodeBuilder<T> {
             Node<T> parent = insertionNode.getParent();
             insertionNode.reset();
 
-            copyRange(copiedNode,0, size/2, insertionNode);
+            {
+                Node sourceNode = copiedNode;
+                Node destNode = insertionNode;
+                Object[] sourcePointers = sourceNode.getPointers();
+                Comparable[] sourceKeys = sourceNode.getKeys();
+                Object[] destPointers = destNode.getPointers();
+                Comparable[] destKeys = destNode.getKeys();
+
+                // end must consider the actual size of the node.
+                for (int i = 0 ; i < (size + 1)/2 ; i ++) {
+                    destPointers[i] = sourcePointers[i];
+                }
+                for (int i = 0 ; i < size/2 ; i ++) {
+                    destKeys[i] = sourceKeys[i];
+                }
+            }
             insertionNode.setParent(parent);
 
             Comparable newValue = copiedNode.getKeys()[size/2];
+            {
+                Node<T> sourceNode = copiedNode;
+                Node<T> destNode = newNode;
+                Object[] sourcePointers = sourceNode.getPointers();
+                Comparable[] sourceKeys = sourceNode.getKeys();
+                Object[] destPointers = destNode.getPointers();
+                Comparable[] destKeys = destNode.getKeys();
 
-            copyRangeFrom(copiedNode, size/2, newNode);
+                // end must consider the actual size of the node.
+                for (int i = (size + 1)/2 ; i < size + 1 ; i ++) {
+                    destPointers[i - (size + 1)/2] = sourcePointers[i];
+                }
+                for (int i = size/2 + 1 ; i < size ; i ++) {
+                    destKeys[i - (size/2 + 1)] = sourceKeys[i];
+                }
+            }
             newNode.setParent(parent);
 
             insertInParent(insertionNode, newValue, newNode);
@@ -134,36 +163,6 @@ public class NodeBuilder<T> {
             keys[i + 1] = keys[i];
         }
         keys[insertionTargetPointerIndex] = smallestKey;
-    }
-
-    private void copyRangeFrom(Node<T> sourceNode, int from, Node<T> destNode) {
-        Object[] sourcePointers = sourceNode.getPointers();
-        Comparable[] sourceKeys = sourceNode.getKeys();
-        Object[] destPointers = destNode.getPointers();
-        Comparable[] destKeys = destNode.getKeys();
-
-        // end must consider the actual size of the node.
-        for (int i = from ; i < size ; i ++) {
-            destPointers[i - from] = sourcePointers[i];
-        }
-        for (int i = from ; i < size ; i ++) {
-            destKeys[i - from] = sourceKeys[i];
-        }
-    }
-
-    private void copyRange(Node<T> sourceNode, int from, int end, Node<T> destNode) {
-        Object[] sourcePointers = sourceNode.getPointers();
-        Comparable[] sourceKeys = sourceNode.getKeys();
-        Object[] destPointers = destNode.getPointers();
-        Comparable[] destKeys = destNode.getKeys();
-
-        // end must consider the actual size of the node.
-        for (int i = from ; i < end ; i ++) {
-            destPointers[i] = sourcePointers[i];
-        }
-        for (int i = from ; i < end ; i ++) {
-            destKeys[i] = sourceKeys[i];
-        }
     }
 
     private <T> void insertInLeaf(Node<T> node, Comparable<T> value, Object pointer, int lastKeyIndex) {
